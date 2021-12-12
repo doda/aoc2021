@@ -8,9 +8,6 @@ module.exports = (toolbox: GluegunToolbox) => {
     let inputFile = `inputs/${day}`
     if (parameters.first === 'test') inputFile += 'test'
 
-    return fs
-      .readFileSync(inputFile, 'utf8')
-      .split('\n')
-      .filter(line => line.length > 0)
+    return fs.readFileSync(inputFile, 'utf8').split('\n')
   }
 }
