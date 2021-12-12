@@ -2,7 +2,7 @@ import { GluegunCommand } from 'gluegun'
 
 const DAY = '02'
 
-const part1 = (input: Array<string>) => {
+const part1 = (input: string[]) => {
   let depth = 0
   let position = 0
   input.map(line => {
@@ -21,7 +21,7 @@ const part1 = (input: Array<string>) => {
   return depth * position
 }
 
-const part2 = (input: Array<string>) => {
+const part2 = (input: string[]) => {
   let depth = 0
   let aim = 0
   let position = 0

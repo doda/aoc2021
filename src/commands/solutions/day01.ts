@@ -2,7 +2,7 @@ import { GluegunCommand } from 'gluegun'
 
 const DAY = '01'
 
-const part1 = (input: Array<number>) => {
+const part1 = (input: number[]) => {
   let result = 0
   let prevNum = Number.MAX_SAFE_INTEGER
   input.map(num => {
@@ -13,7 +13,7 @@ const part1 = (input: Array<number>) => {
   return result
 }
 
-const part2 = (input: Array<number>) => {
+const part2 = (input: number[]) => {
   let triples = input.slice(2).map((x, i) => x + input[i] + input[i + 1])
   return triples.slice(1).reduce((a, x, i) => a + (triples[i] < x ? 1 : 0), 0)
 }

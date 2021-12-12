@@ -2,7 +2,7 @@ import { GluegunCommand } from 'gluegun'
 
 const DAY = '03'
 
-const getCounter = (input: Array<string>): Array<number> => {
+const getCounter = (input: string[]): number[] => {
   let nBits = input[0].length
   let counter = Array(nBits).fill(0)
   input.map(str => {
@@ -11,7 +11,7 @@ const getCounter = (input: Array<string>): Array<number> => {
   return counter
 }
 
-const part1 = (input: Array<string>) => {
+const part1 = (input: string[]) => {
   let nRows = input.length
   let gamma = []
   let epsilon = []
@@ -26,7 +26,7 @@ const part1 = (input: Array<string>) => {
   return gammaNum * epsilonNum
 }
 
-const part2 = (input: Array<string>) => {
+const part2 = (input: string[]) => {
   let result = 1
 
   let gammaOrEpsilon = [true, false]

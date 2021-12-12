@@ -3,7 +3,7 @@ import * as fs from 'fs'
 import { GluegunToolbox } from 'gluegun'
 
 module.exports = (toolbox: GluegunToolbox) => {
-  toolbox.readInput = (day: string): Array<string> => {
+  toolbox.readInput = (day: string): string[] => {
     const { parameters } = toolbox
     let param = parameters.first
     let inputFile = `inputs/${day}`
