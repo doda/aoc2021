@@ -24,7 +24,7 @@ const braceValues2: Record<string, number> = {
 }
 
 const isClosing = (stack: string[], char: string, pair: string[]) => {
-  let [open, close] = pair
+  const [open, close] = pair
   return (
     char === close && stack.length !== 0 && stack[stack.length - 1] === open
   )
@@ -33,10 +33,10 @@ const isClosing = (stack: string[], char: string, pair: string[]) => {
 const part = (input: string[], partNum: number): number => {
   let result = 0
   let lineScores: number[] = []
-  for (let line of input) {
+  for (const line of input) {
     let stack: string[] = []
     let valid = true
-    for (let char of line) {
+    for (const char of line) {
       if (['(', '[', '{', '<'].includes(char)) {
         stack.push(char)
       } else if (braces.some(pair => isClosing(stack, char, pair))) {
@@ -66,7 +66,7 @@ const command: GluegunCommand = {
   name: `day${DAY}`,
   run: async toolbox => {
     const { print, readInput } = toolbox
-    let input = readInput(DAY)
+    const input = readInput(DAY)
 
     print.info(`Part 1: ${part(input, 1)}`)
     print.info(`Part 2: ${part(input, 2)}`)

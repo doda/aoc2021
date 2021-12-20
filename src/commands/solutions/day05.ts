@@ -13,19 +13,19 @@ const part = (input: string[], partNum: number) => {
   const makeKey = (x: number, y: number): string => `${x}.${y}`
 
   for (let line of input) {
-    let [x1, y1, x2, y2] = line.split(/\D+/).map(x => parseInt(x))
-    let a: Point = { x: x1, y: y1 }
-    let b: Point = { x: x2, y: y2 }
+    const [x1, y1, x2, y2] = line.split(/\D+/).map(x => parseInt(x))
+    const a: Point = { x: x1, y: y1 }
+    const b: Point = { x: x2, y: y2 }
 
-    let xDelta = delta(a.x, b.x)
-    let yDelta = delta(a.y, b.y)
+    const xDelta = delta(a.x, b.x)
+    const yDelta = delta(a.y, b.y)
     if (partNum === 1 && xDelta !== 0 && yDelta !== 0) {
       // ignore diagonals for part 1
       continue
     }
     let [x, y] = [a.x, a.y]
     while (true) {
-      let key = makeKey(x, y)
+      const key = makeKey(x, y)
       counter[key] = (counter[key] || 0) + 1
       if (x === b.x && y === b.y) break
       x += xDelta
@@ -33,7 +33,7 @@ const part = (input: string[], partNum: number) => {
     }
   }
   let result = 0
-  for (let [_, value] of Object.entries(counter)) {
+  for (const [_, value] of Object.entries(counter)) {
     if (value >= 2) result += 1
   }
   return result
@@ -43,7 +43,7 @@ const command: GluegunCommand = {
   name: `day${DAY}`,
   run: async toolbox => {
     const { print, readInput } = toolbox
-    let input = readInput(DAY)
+    const input = readInput(DAY)
 
     print.info(`Part 1: ${part(input, 1)}`)
     print.info(`Part 2: ${part(input, 2)}`)

@@ -2,22 +2,6 @@ import { GluegunCommand } from 'gluegun'
 
 const DAY = '08'
 
-interface Entry {
-  patterns: Set<string>[]
-  outputs: Set<string>[]
-}
-
-const subset = <T>(a: Set<T>, b: Set<T>) => {
-  return [...b].every(x => a.has(x))
-}
-
-const intersection = <T>(a: Set<T>, b: Set<T>) => {
-  return new Set([...a].filter(i => b.has(i)))
-}
-
-const equal = <T>(a: Set<T>, b: Set<T>) => {
-  return a.size === b.size && [...a].every(x => b.has(x))
-}
 //  0:      1:      2:      3:      4:
 //  aaaa    ....    aaaa    aaaa    ....
 // b    c  .    c  .    c  .    c  b    c
@@ -39,11 +23,28 @@ const equal = <T>(a: Set<T>, b: Set<T>) => {
 // length == 5: 2, 3, 5
 // length == 6: 0, 6, 9
 
+interface Entry {
+  patterns: Set<string>[]
+  outputs: Set<string>[]
+}
+
+const subset = <T>(a: Set<T>, b: Set<T>) => {
+  return [...b].every(x => a.has(x))
+}
+
+const intersection = <T>(a: Set<T>, b: Set<T>) => {
+  return new Set([...a].filter(i => b.has(i)))
+}
+
+const equal = <T>(a: Set<T>, b: Set<T>) => {
+  return a.size === b.size && [...a].every(x => b.has(x))
+}
+
 const parseInput = (input: string[]): Entry[] => {
   let result: Entry[] = []
-  for (let line of input) {
-    let [patterns, outputs] = line.split(' | ')
-    let entry: Entry = {
+  for (const line of input) {
+    const [patterns, outputs] = line.split(' | ')
+    const entry: Entry = {
       patterns: patterns.split(' ').map(pattern => new Set(pattern)),
       outputs: outputs.split(' ').map(output => new Set(output))
     }
@@ -55,8 +56,8 @@ const parseInput = (input: string[]): Entry[] => {
 
 const part1 = (entries: Entry[]) => {
   let result = 0
-  for (let entry of entries) {
-    for (let output of entry.outputs) {
+  for (const entry of entries) {
+    for (const output of entry.outputs) {
       if ([2, 3, 4, 7].includes(output.size)) {
         result++
       }
@@ -69,7 +70,7 @@ const parseEntry = (entry: Entry): number => {
   let knownPatterns: Record<number, Set<string>> = {}
 
   // Parse definitive patterns first
-  for (let pattern of entry.patterns) {
+  for (const pattern of entry.patterns) {
     if (pattern.size === 2) knownPatterns[1] = pattern
     if (pattern.size === 3) knownPatterns[7] = pattern
     if (pattern.size === 4) knownPatterns[4] = pattern
@@ -77,7 +78,7 @@ const parseEntry = (entry: Entry): number => {
   }
 
   // Use knownPatterns to deduce ambiguous ones
-  for (let pattern of entry.patterns) {
+  for (const pattern of entry.patterns) {
     if (pattern.size === 5) {
       if (subset(pattern, knownPatterns[7])) {
         knownPatterns[3] = pattern
@@ -99,8 +100,8 @@ const parseEntry = (entry: Entry): number => {
   }
 
   let result = 0
-  for (let output of entry.outputs) {
-    for (let [index, knownPat] of Object.entries(knownPatterns)) {
+  for (const output of entry.outputs) {
+    for (const [index, knownPat] of Object.entries(knownPatterns)) {
       if (equal(output, knownPat)) {
         result = result * 10 + parseInt(index)
       }
@@ -111,7 +112,7 @@ const parseEntry = (entry: Entry): number => {
 
 const part2 = (entries: Entry[]) => {
   let result = 0
-  for (let entry of entries) {
+  for (const entry of entries) {
     result += parseEntry(entry)
   }
   return result
@@ -121,8 +122,8 @@ const command: GluegunCommand = {
   name: `day${DAY}`,
   run: async toolbox => {
     const { print, readInput } = toolbox
-    let input = readInput(DAY)
-    let entries = parseInput(input)
+    const input = readInput(DAY)
+    const entries = parseInput(input)
 
     print.info(`Part 1: ${part1(entries)}`)
     print.info(`Part 2: ${part2(entries)}`)

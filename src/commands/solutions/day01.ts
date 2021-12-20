@@ -14,7 +14,7 @@ const part1 = (input: number[]) => {
 }
 
 const part2 = (input: number[]) => {
-  let triples = input.slice(2).map((x, i) => x + input[i] + input[i + 1])
+  const triples = input.slice(2).map((x, i) => x + input[i] + input[i + 1])
   return triples.slice(1).reduce((a, x, i) => a + (triples[i] < x ? 1 : 0), 0)
 }
 
@@ -22,8 +22,8 @@ const command: GluegunCommand = {
   name: `day${DAY}`,
   run: async toolbox => {
     const { print, readInput } = toolbox
-    let input = readInput(DAY)
-    let numInput = input.map(line => parseInt(line))
+    const input = readInput(DAY)
+    const numInput = input.map(line => parseInt(line))
 
     print.info(`Part 1: ${part1(numInput)}`)
     print.info(`Part 2: ${part2(numInput)}`)

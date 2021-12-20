@@ -20,7 +20,7 @@ let neighbors = (
   M: number
 ): number[] => {
   let result = []
-  for (let [di, dj] of DELTAS) {
+  for (const [di, dj] of DELTAS) {
     if (valid(i + di, j + dj, N, M)) result.push(mat[i + di][j + dj])
   }
   return result
@@ -31,13 +31,13 @@ const part1 = (mat: number[][]) => {
 }
 
 const findLowPoints = (mat: number[][]): number[][] => {
-  let N = mat.length
-  let M = mat[0].length
+  const N = mat.length
+  const M = mat[0].length
   let result: number[][] = []
   for (let i = 0; i < N; i++) {
     for (let j = 0; j < M; j++) {
-      let val = mat[i][j]
-      let neighs = neighbors(mat, i, j, N, M)
+      const val = mat[i][j]
+      const neighs = neighbors(mat, i, j, N, M)
       if (neighs.every(n => n > val)) {
         result.push([i, j])
       }
@@ -56,10 +56,10 @@ const fillBasin = (
   M: number,
   visited: Set<string>
 ) => {
-  let key = makeKey(i, j)
+  const key = makeKey(i, j)
   if (visited.has(key)) return
   visited.add(key)
-  for (let [di, dj] of DELTAS) {
+  for (const [di, dj] of DELTAS) {
     if (
       valid(i + di, j + dj, N, M) &&
       mat[i + di][j + dj] > mat[i][j] &&
@@ -71,12 +71,12 @@ const fillBasin = (
 }
 
 const part2 = (mat: number[][]): number => {
-  let N = mat.length
-  let M = mat[0].length
+  const N = mat.length
+  const M = mat[0].length
 
   let basins: Record<string, number> = {}
-  let lowPoints = findLowPoints(mat)
-  for (let [i, j] of lowPoints) {
+  const lowPoints = findLowPoints(mat)
+  for (const [i, j] of lowPoints) {
     let basin: Set<string> = new Set()
     fillBasin(mat, i, j, N, M, basin)
     basins[makeKey(i, j)] = basin.size
@@ -90,8 +90,8 @@ const command: GluegunCommand = {
   name: `day${DAY}`,
   run: async toolbox => {
     const { print, readInput } = toolbox
-    let input: string[] = readInput(DAY)
-    let mat: number[][] = input.map(row =>
+    const input: string[] = readInput(DAY)
+    const mat: number[][] = input.map(row =>
       row.split('').map(val => parseInt(val))
     )
 

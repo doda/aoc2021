@@ -6,7 +6,7 @@ const part1 = (input: string[]) => {
   let depth = 0
   let position = 0
   input.map(line => {
-    let [direction, amount] = line.split(' ')
+    const [direction, amount] = line.split(' ')
     let amountNum = Number(amount)
     switch (direction) {
       case 'forward':
@@ -26,7 +26,7 @@ const part2 = (input: string[]) => {
   let aim = 0
   let position = 0
   input.map(line => {
-    let [direction, amount] = line.split(' ')
+    const [direction, amount] = line.split(' ')
     let amountNum = Number(amount)
     switch (direction) {
       case 'forward':
@@ -46,7 +46,7 @@ const command: GluegunCommand = {
   name: `day${DAY}`,
   run: async toolbox => {
     const { print, readInput } = toolbox
-    let input = readInput(DAY)
+    const input = readInput(DAY)
 
     print.info(`Part 1: ${part1(input)}`)
     print.info(`Part 2: ${part2(input)}`)
