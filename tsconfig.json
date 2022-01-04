@@ -15,7 +15,7 @@
     "noImplicitAny": false,
     "downlevelIteration": true,
     "noImplicitThis": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "sourceMap": false,
     "inlineSourceMap": true,
     "outDir": "build",
