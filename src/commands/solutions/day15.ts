@@ -69,7 +69,7 @@ const part = (mat: number[][], factor: number): number => {
 
     for (const [di, dj] of DELTAS) {
       if (valid(pos.i + di, pos.j + dj)) {
-        const neigh = new Pos(
+        const neigh = new Pos( // 🐴
           pos.i + di,
           pos.j + dj,
           dist[pos.key()] + matGet(pos.i + di, pos.j + dj)
