@@ -32,8 +32,7 @@
   "license": "MIT",
   "dependencies": {
     "@datastructures-js/priority-queue": "^5.3.0",
-    "gluegun": "latest",
-    "lodash": "^4.17.21"
+    "gluegun": "latest"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
